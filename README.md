@@ -4,6 +4,20 @@
 
 When it comes to operations, this container is built with the assumption that the host system will be a Linux system. As such, file ownership and permissions are all built for Linux file systems in mind. Usage of this container on a Windows host has not been tested and is not recommended.
 
+## Volumes
+
+This container necessitates a single volume which is the mount point `/data`. It should be used like so :
+
+```
+docker run -v /path/to/minecraft/server:/data {other arguments}
+```
+
+## Ports
+
+This container exposes port 25565 which is the default Minecraft server port. It is also used for query which this server enables by default if no `server.properties` file is found in the data volume.
+
+Why is query enabled automatically by the server? This is because the included script to check if your server is online (`mc-up.sh`) makes use of an external, freely available, API to query your server and know if it's online or not. You can always edit your server properties and disable query if you won't make use of this script.
+
 ## Variables
 
 ### Regular operations variables
